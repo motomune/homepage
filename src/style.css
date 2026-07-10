@@ -184,6 +184,60 @@ body {
   50% { transform: translateX(-50%) translateY(8px); }
 }
 
+/* ===== 中央ポータル演出 ===== */
+.portal-ring {
+  position: fixed;
+  left: 50%;
+  top: 45%;
+  z-index: 5;
+  width: 46vmax;
+  height: 46vmax;
+  margin: -23vmax 0 0 -23vmax;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 0 60px rgba(140, 190, 255, 0.8),
+    inset 0 0 60px rgba(140, 190, 255, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.flash {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== 商品説明の実写ステージ ===== */
+.product-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(90% 75% at 50% 42%, #ffffff 0%, #eef0f2 55%, #d4d8dd 100%);
+}
+.product-img {
+  max-width: min(78vw, 900px);
+  max-height: 74vh;
+  object-fit: contain;
+  will-change: transform;
+  filter: drop-shadow(0 40px 60px rgba(20, 30, 50, 0.35));
+}
+/* 実写ステージ表示中は説明テキストを濃色に */
+.overlay.on-light h3 { color: #14171c; }
+.overlay.on-light p { color: #3d4450; }
+.overlay.on-light .big-num { color: #14171c; }
+.overlay.on-light .big-num .unit { color: #6b7482; }
+
 /* ===== スクロール連動オーバーレイ ===== */
 .overlay {
   position: fixed;

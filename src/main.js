@@ -61,8 +61,11 @@ const camPos = new THREE.Vector3();
 // ===== DOM =====
 const hero = document.getElementById('hero');
 const topbar = document.getElementById('topbar');
+// hero.mp4 / hero.jpg が無い場合は要素を消してCSS背景にフォールバック
 const heroVideo = document.querySelector('.hero-video');
 if (heroVideo) heroVideo.addEventListener('error', () => heroVideo.remove(), true);
+const heroImg = document.querySelector('.hero-img');
+if (heroImg) heroImg.addEventListener('error', () => heroImg.remove(), true);
 
 const overlays = [...document.querySelectorAll('.overlay')].map((el) => ({
   el,

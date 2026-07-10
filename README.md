@@ -1,4 +1,4 @@
-# New LP Site (仮)
+# homepage
 
 3D演出付きのランディングページ。Vite + Three.js。GitHub Pagesでの公開を想定した静的サイト。
 

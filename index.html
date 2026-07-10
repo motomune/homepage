@@ -19,16 +19,18 @@
 
     <!-- ヒーロー：走行ムービー（差し替え前提） -->
     <section class="hero" id="hero">
-      <div class="hero-bg"></div>
-      <img class="hero-img" src="/hero.jpg" alt="" />
-      <video class="hero-video" src="/hero.mp4" autoplay muted loop playsinline></video>
+      <div class="hero-media" id="heroMedia">
+        <div class="hero-bg"></div>
+        <img class="hero-img" src="/hero.jpg" alt="" />
+        <video class="hero-video" src="/hero.mp4" autoplay muted loop playsinline></video>
+      </div>
       <div class="hero-shade"></div>
       <div class="hero-inner">
-        <p class="brand">JAVA BIKES</p>
-        <h1 class="hero-title">NEO3</h1>
-        <p class="hero-tag">革新のフォールディング。かつてない軽さと走り。</p>
+        <p class="brand hero-fade">JAVA BIKES</p>
+        <h1 class="hero-title" id="heroTitle">NE<span id="oChar">O</span>3</h1>
+        <p class="hero-tag hero-fade">革新のフォールディング。かつてない軽さと走り。</p>
       </div>
-      <p class="scroll-cue">SCROLL</p>
+      <p class="scroll-cue hero-fade">SCROLL</p>
     </section>
 
     <!-- ダイブ -->

@@ -67,6 +67,35 @@ if (heroVideo) heroVideo.addEventListener('error', () => heroVideo.remove(), tru
 const heroImg = document.querySelector('.hero-img');
 if (heroImg) heroImg.addEventListener('error', () => heroImg.remove(), true);
 
+// ===== 「O」ポータル演出の準備 =====
+// 道の消失点（画面に対する割合）— 動画に合わせて調整可
+const VANISH = { x: 0.58, y: 0.44 };
+const heroMedia = document.getElementById('heroMedia');
+const heroTitle = document.getElementById('heroTitle');
+const oChar = document.getElementById('oChar');
+const heroFades = [...document.querySelectorAll('.hero-fade')];
+
+// タイトル内の「O」の中心位置を測る（transformを外した素の状態で）
+const oInfo = { originX: 50, originY: 50, dx: 0, dy: 0 };
+function measureO() {
+  const prev = heroTitle.style.transform;
+  heroTitle.style.transform = 'none';
+  const tr = heroTitle.getBoundingClientRect();
+  const or = oChar.getBoundingClientRect();
+  const ocx = or.left + or.width / 2;
+  const ocy = or.top + or.height * 0.54; // イタリック分やや下
+  oInfo.originX = ((ocx - tr.left) / tr.width) * 100;
+  oInfo.originY = ((ocy - tr.top) / tr.height) * 100;
+  // Oの中心を消失点に重ねるための移動量
+  oInfo.dx = innerWidth * VANISH.x - ocx;
+  oInfo.dy = innerHeight * VANISH.y - ocy;
+  heroTitle.style.transform = prev;
+  heroTitle.style.transformOrigin = `${oInfo.originX}% ${oInfo.originY}%`;
+  heroMedia.style.transformOrigin = `${VANISH.x * 100}% ${VANISH.y * 100}%`;
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureO);
+measureO();
+
 const overlays = [...document.querySelectorAll('.overlay')].map((el) => ({
   el,
   a: parseFloat(el.dataset.in),
@@ -95,10 +124,25 @@ function frame() {
   // スクロールを滑らかに追従
   p += (pTarget - p) * Math.min(1, dt * 7);
 
-  // --- ヒーロー（吸い込まれる演出：拡大しながらフェード） ---
-  const heroFade = ss(p, 0.1, 0.17);
+  // --- ヒーロー：「O」の中をくぐり抜けて3D世界へ ---
+  // 1. 周辺テキストが先に消える
+  const uiFade = ss(p, 0.02, 0.06);
+  for (const el of heroFades) el.style.opacity = String(1 - uiFade);
+
+  // 2. タイトルのOが道の消失点へ移動し、Oの輪が画面を飲み込むまで拡大
+  const align = ss(p, 0.04, 0.09);
+  const zoom = ss(p, 0.06, 0.16);
+  const titleScale = 1 + zoom * 46;
+  heroTitle.style.transform =
+    `translate(${oInfo.dx * align}px, ${oInfo.dy * align}px) scale(${titleScale})`;
+  heroTitle.classList.toggle('zooming', zoom > 0.05);
+
+  // 3. 背景の映像も消失点に向かって突っ込む
+  heroMedia.style.transform = `scale(${1 + zoom * 1.7})`;
+
+  // 4. Oを抜けきったらフェードして3Dへ
+  const heroFade = ss(p, 0.145, 0.18);
   hero.style.opacity = String(1 - heroFade);
-  hero.style.transform = `scale(${1 + ss(p, 0, 0.17) * 1.9})`;
   hero.style.visibility = heroFade >= 1 ? 'hidden' : 'visible';
 
   // --- 3Dキャンバスのフェードイン ---
@@ -149,4 +193,5 @@ addEventListener('resize', () => {
   camera.aspect = innerWidth / innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(innerWidth, innerHeight);
+  measureO();
 });

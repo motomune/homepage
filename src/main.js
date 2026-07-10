@@ -69,7 +69,7 @@ if (heroImg) heroImg.addEventListener('error', () => heroImg.remove(), true);
 
 // ===== 「O」ポータル演出の準備 =====
 // 道の消失点（画面に対する割合）— 動画に合わせて調整可
-const VANISH = { x: 0.58, y: 0.44 };
+const VANISH = { x: 0.63, y: 0.42 };
 const heroMedia = document.getElementById('heroMedia');
 const heroTitle = document.getElementById('heroTitle');
 const oChar = document.getElementById('oChar');

@@ -3,24 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New LP Site</title>
+    <title>JAVA BIKES NEO3 | 革新のフォールディングバイク</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
     <canvas id="bg-canvas"></canvas>
 
-    <main class="content">
-      <section class="hero">
-        <h1>あなたのキャッチコピー</h1>
-        <p>ここにサービスやプロダクトの説明文が入ります。</p>
-        <a class="cta" href="#contact">お問い合わせ</a>
-      </section>
+    <header class="topbar" id="topbar">
+      <span class="tb-brand">JAVA BIKES</span>
+      <span class="tb-model">NEO3</span>
+    </header>
 
-      <section id="contact" class="section">
-        <h2>お問い合わせ</h2>
-        <p>connect@example.com</p>
-      </section>
-    </main>
+    <!-- ヒーロー：走行ムービー（差し替え前提） -->
+    <section class="hero" id="hero">
+      <div class="hero-bg"></div>
+      <video class="hero-video" src="/hero.mp4" autoplay muted loop playsinline></video>
+      <div class="hero-shade"></div>
+      <div class="hero-inner">
+        <p class="brand">JAVA BIKES</p>
+        <h1 class="hero-title">NEO3</h1>
+        <p class="hero-tag">革新のフォールディング。かつてない軽さと走り。</p>
+      </div>
+      <p class="scroll-cue">SCROLL</p>
+    </section>
+
+    <!-- ダイブ -->
+    <div class="overlay ov-center" data-in="0.19" data-out="0.29">
+      <h2 class="dive-copy">その走りへ、<br />飛び込め。</h2>
+    </div>
+
+    <!-- 回転中のポイント -->
+    <div class="overlay ov-left" data-in="0.32" data-out="0.41">
+      <h3 class="big-num">9.8<span class="unit">kg</span></h3>
+      <p>空気のように軽い。<br />片手で持ち上がる、フルサイズの走り。</p>
+    </div>
+    <div class="overlay ov-right" data-in="0.42" data-out="0.51">
+      <h3>革新のフォールディング機構</h3>
+      <p>従来のNEOとは、まったくの別物。<br />新設計ヒンジが、数秒で驚きのサイズへ。</p>
+    </div>
+    <div class="overlay ov-left" data-in="0.52" data-out="0.61">
+      <h3>小径を超える、走行性能</h3>
+      <p>20インチ × ディスクブレーキ。<br />街も、坂も、想像より速い。</p>
+    </div>
+
+    <!-- 折りたたみ -->
+    <div class="overlay ov-center" data-in="0.64" data-out="0.72">
+      <h2 class="fold-copy">たたむ。</h2>
+    </div>
+    <div class="overlay ov-center" data-in="0.73" data-out="0.83">
+      <h2>わずか数秒で、<br />この小ささ。</h2>
+    </div>
+
+    <!-- フィナーレ：スペックとCTA -->
+    <div class="overlay ov-center final-wrap" data-in="0.87" data-out="1.5" data-f="0.05">
+      <div class="final-panel">
+        <h2>JAVA BIKES <em>NEO3</em></h2>
+        <dl class="spec">
+          <div><dt>重量</dt><dd>約9.8kg</dd></div>
+          <div><dt>タイヤ</dt><dd>20インチ</dd></div>
+          <div><dt>ブレーキ</dt><dd>ディスクブレーキ</dd></div>
+          <div><dt>折りたたみ</dt><dd>新開発クイックフォールド</dd></div>
+        </dl>
+        <a class="cta" href="#">この一台を、手に入れる</a>
+        <p class="note">※スペック・価格・購入リンクは正式情報に差し替え予定</p>
+      </div>
+    </div>
+
+    <div class="scroll-space"></div>
 
     <script type="module" src="/src/main.js"></script>
   </body>
